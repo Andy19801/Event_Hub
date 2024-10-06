@@ -1,0 +1,69 @@
+
+:root {
+  --subheading: 'Arial', sans-serif; /* Example font family */
+  --red: #e63946; /* Replace with your desired red color */
+  --bordercolour: #f1faee; /* Replace with your border color */
+  --textcolour: #333; /* Replace with your text color */
+  --background: #000; 
+  --textlight: #fff; 
+}
+
+.services {
+  background-color: var(--background);
+  text-align: center;
+  padding: 20px; 
+}
+
+.services h1 {
+  font-size: 80px;
+  font-family: var(--subheading);
+  color: var(--textlight);
+}
+
+.services span {
+  color: var(--red);
+}
+
+.services .cont2 {
+  display: grid;
+  grid-template-columns: 250px 250px 250px;
+  grid-auto-rows: minmax(150px, auto);
+  gap: 16px;
+  justify-content: space-evenly;
+  padding: 20px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.services .cont2 .box {
+  padding: 20px;
+    min-height: 100px;
+    min-width: 300px;
+    background: #41464bbf;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    transition: 1s;
+}
+
+.services .cont2 .box:hover {
+  box-shadow: 5px 8px 14px var(--red);
+}
+
+.services .cont2 .box h4 {
+  color: var(--textlight);
+}
+
+.services .cont2 .box p {
+  font-size: 10px;
+  color: var(--textlight);
+}
+
+.services .cont2 .box i {
+  color: var(--red);
+  margin-bottom: 10px;
+  transition: 1s;
+}
+
+.services .cont2 .box:hover i {
+  transform: translateY(-20px) scale(1.5);
+}

@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.15fcdbdf.css",
+    "main.js": "/static/js/main.92089516.js",
+    "static/media/e2.jpeg": "/static/media/e2.96581b7dd7f50eaa8da7.jpeg",
+    "static/media/e3.jpeg": "/static/media/e3.0fe4f4324e151cb93c75.jpeg",
+    "static/media/e1.jpeg": "/static/media/e1.0dd36e3585480937d347.jpeg",
+    "static/media/e9.jpg": "/static/media/e9.2b327d702e0d43de5635.jpg",
+    "static/media/e5.jpeg": "/static/media/e5.5c982564ddf0eecc7862.jpeg",
+    "static/media/e4.jpeg": "/static/media/e4.1a0ed8a4e64ff717352b.jpeg",
+    "static/media/e7.jpg": "/static/media/e7.f976b042ab6cdedd2b6a.jpg",
+    "static/media/e11.jpg": "/static/media/e11.6ef9212f64bc09a94de2.jpg",
+    "static/media/e12.jpg": "/static/media/e12.c5d2cbc2bd273cc68770.jpg",
+    "static/media/person3.jpg": "/static/media/person3.ee493bc7bfff6fd9e0e6.jpg",
+    "static/media/person1.jpg": "/static/media/person1.f38c9c3874af082e669a.jpg",
+    "static/media/shadi.jpg": "/static/media/shadi.8bfb46f9a918c5cfdad3.jpg",
+    "static/media/janeu.jpg": "/static/media/janeu.1874a7128d49c2a02255.jpg",
+    "static/media/e10.jpeg": "/static/media/e10.4b18dd665c743e496653.jpeg",
+    "static/media/person2.jpeg": "/static/media/person2.9c87d73c25d7d3224537.jpeg",
+    "static/media/e6.jpg": "/static/media/e6.7dd8978ac1fe759aa5f8.jpg",
+    "static/media/logo1.png": "/static/media/logo1.19eb37ba310f035f4ab8.png",
+    "static/media/e13.jpg": "/static/media/e13.ae7128bcfa87e29bcbad.jpg",
+    "index.html": "/index.html",
+    "main.15fcdbdf.css.map": "/static/css/main.15fcdbdf.css.map",
+    "main.92089516.js.map": "/static/js/main.92089516.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.15fcdbdf.css",
+    "static/js/main.92089516.js"
+  ]
+}

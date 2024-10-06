@@ -1,0 +1,347 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #ffffffcb;
+}
+
+.logo-container img {
+  height: 50px;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center; /* Ensure alignment of profile section and buttons */
+}
+
+.order-btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #7b52b9;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.icon {
+  margin-left: 10px;
+}
+
+/* Profile section styling */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover; /* Ensure the profile picture fits nicely */
+  border: 2px solid #7b52b9;
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Arrow button styles */
+.arrow-wrapper {
+  margin-left: 5px;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid white;
+}
+
+/* Logout and Auth Buttons */
+.logout-btn, .login-btn, .signin-btn {
+  padding: 10px 15px;
+  background-color: #7b52b9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn:hover, .login-btn:hover, .signin-btn:hover, .order-btn:hover {
+  background-color: #6848a0; /* Darker shade for hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.header {
+  display: grid;
+  z-index: var(--zi-header);
+  box-sizing: border-box;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+  grid-template-rows: auto;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  transition: background-color 0.3s ease;
+  background-color: #000000;
+  gap: 20px;
+  height: 130px;
+  transition: background 0.3s ease;
+}
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: transparent; /* Make the header background transparent 
+  /*z-index: 1000;  Ensure the header stays on top of other content 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /*padding: 20px 50px; 
+  transition: background 0.3s ease; /* Smooth transition when scrolling 
+}
+
+.header.scrolled {
+  background: rgba(0, 0, 0, 0.8); /* Change background to semi-transparent black on scroll 
+}
+
+.logo-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container .logo {
+  width: 120px; /* Adjust this value as needed 
+  height: auto;
+}
+
+.nav {
+  grid-column: 2 / 4;
+  display: flex;
+  justify-content: center;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin: 0 20px;
+}
+
+.nav-item a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-item:hover a {
+  color: #a370f0;
+  transform: scale(1.1);
+}
+
+.header .order-btn {
+  grid-column: 4 / 5;
+  justify-self: end;
+  background: #a370f0;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #714da6;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: pointer;
+}
+
+.header .order-btn .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.header .order-btn:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.header .order-btn .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #7b52b9;
+}
+
+.header .order-btn:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.header .order-btn:active .icon {
+  transform: scale(0.95);
+}
+
+/* Existing styles... 
+
+.header .auth-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.header .auth-buttons button {
+  --primary-color: #645bff;
+  --secondary-color: #fff;
+  --hover-color: #111;
+  --arrow-width: 10px;
+  --arrow-stroke: 2px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 20px;
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+}
+
+.header .auth-buttons button .arrow-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header .auth-buttons button .arrow {
+  margin-top: 1px;
+  width: var(--arrow-width);
+  background: var(--primary-color);
+  height: var(--arrow-stroke);
+  position: relative;
+  transition: 0.2s;
+}
+
+.header .auth-buttons button .arrow::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  border: solid var(--secondary-color);
+  border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+  display: inline-block;
+  top: -3px;
+  right: 3px;
+  transition: 0.2s;
+  padding: 3px;
+  transform: rotate(-45deg);
+}
+
+.header .auth-buttons button:hover {
+  background-color: var(--hover-color);
+}
+
+.header .auth-buttons button:hover .arrow {
+  background: var(--secondary-color);
+}
+
+.header .auth-buttons button:hover .arrow::before {
+  right: 0;
+}
+
+/* New styles for LogoutButton 
+.header .auth-buttons .logout-btn {
+  background-color: #e63946; /* Red color for logout button 
+  color: white;
+  padding: 0.8em 1.5em;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: background-color 0.3s ease;
+}
+
+.header .auth-buttons .logout-btn:hover {
+  background-color: #d62839; /* Darker red on hover 
+}
+
+.header .auth-buttons .logout-btn .arrow-wrapper {
+  display: none; /* Hide arrow for logout button 
+}
+
+
+
+
+
+*/
+
+
+

@@ -1,0 +1,83 @@
+:root {
+  --subheading: 'Arial', sans-serif; /* Font family for subheadings */
+  --cursive: 'Cursive', sans-serif; /* Font family for cursive text */
+  --red: #e63946; /* Red color */
+  --background: #000; /* Background color used in Review section */
+  --text-light: #f5f5f5; /* Light text color */
+  --text-muted: rgb(187, 186, 186); /* Muted text color */
+  --fontcolor: var(--text-muted); /* Font color for text */
+  --service-bg-colour: #111; /* Background color for the boxes in Review section */
+}
+
+.rev_cont {
+  background-color: var(--background); /* Match the background color from :root */
+  padding: 50px 0;
+  text-align: center; /* Center the text */
+}
+
+.rev_cont h1 {
+  font-size: 80px;
+  font-family: var(--subheading);
+  color: var(--text-light);
+}
+
+.rev_cont span {
+  color: var(--red);
+}
+
+.rev_cont .inner {
+    display: flex;
+    padding: 50px 7px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 30px;
+}
+
+.rev_cont .inner .col {
+  padding: 20px;
+  border: 8px solid var(--bordercolour);
+  border-radius: 20px;
+  max-width: 400px;
+  background-color: var(--service-bg-colour); /* Match the box background color */
+  transition: 0.70s;
+}
+
+.rev_cont .inner .col:hover {
+  box-shadow: -5px 8px 14px var(--red);
+  transform: translateY(-20px) translateX(10px) scale(1.1);
+}
+
+.rev_cont .inner .col h3 {
+  font-family: var(--cursive);
+  color: var(--text-light);
+}
+
+.rev_cont .inner .col .foto {
+  overflow: hidden;
+  min-height: 100px;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.rev_cont .inner .col img {
+  max-height: 300px;
+  max-width: 150px;
+  padding-bottom: 5px;
+  border-radius: 50%;
+  transition: 0.7s;
+}
+
+.rev_cont .inner .col:hover img {
+  transform: scale(1.1);
+}
+
+.rev_cont .inner .col p {
+  color: var(--fontcolor);
+  font-size: 14px;
+  text-align: center;
+}
+
+.rev_cont .inner .star i {
+  color: var(--text-light);
+}

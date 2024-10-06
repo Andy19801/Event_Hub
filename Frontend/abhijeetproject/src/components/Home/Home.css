@@ -1,0 +1,60 @@
+/* src/components/Home/Home.css */
+.cont1 {
+    min-height: 100px;
+    min-width: 900px;
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    padding-top: 100px; /* Added padding to push content below the header */
+}
+
+.cont1 p {
+    font-size: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: whitesmoke;
+    margin: 0;
+}
+
+.cont1 p span {
+    color: var(--red); /* Ensure --red is defined in your global CSS */
+}
+
+.cont1 .cont_in p {
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: whitesmoke;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.cont1 .cont_in p span {
+    color: var(--red); /* Ensure --red is defined in your global CSS */
+    font-family: var(--cursive); /* Ensure --cursive is defined in your global CSS */
+    font-size: 40px;
+}
+
+.cont1 .cont_in {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 244px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 50%;
+}

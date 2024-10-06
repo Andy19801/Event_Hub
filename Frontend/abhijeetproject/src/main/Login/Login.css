@@ -1,0 +1,60 @@
+.login-page {
+    background-color: black;
+    color: white; /* Ensures text is visible on a black background */
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-page h1 {
+    font-size: 2.5rem;
+    font-family: var(--subheading); /* Consistent font */
+    margin-bottom: 1.5rem;
+}
+
+.inputBox {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.inputBox label {
+    display: block;
+    font-size: 1rem;
+    color: whitesmoke; /* Consistent label color */
+    margin-bottom: 0.5rem;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    background: #333; /* Matches other input backgrounds */
+    border: 1px solid #444;
+    color: whitesmoke; /* Consistent input text color */
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--red); /* Primary button color */
+    color: whitesmoke; /* Consistent button text color */
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: darken(var(--red), 10%); /* Darken on hover */
+}
+
+.login-page p {
+    font-size: 0.875rem;
+    color: #bbb; /* Lighter text color for links */
+}

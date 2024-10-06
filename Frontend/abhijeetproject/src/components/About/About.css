@@ -1,0 +1,67 @@
+:root {
+  --subheading: 'Arial', sans-serif; /* Example font family */
+  --cursive: 'Cursive', sans-serif; /* Example cursive font family */
+  --red: #e63946; /* Example red color */
+  --background: #000; /* Background color used in About section */
+  --text-light: #f5f5f5;
+  --text-muted: rgb(187, 186, 186);
+}
+
+.about {
+  background-color: var(--background); /* Background color for the About section */
+  padding: 20px;
+  text-align: center;
+}
+
+.about_h {
+  padding-top: 20px;
+  color: var(--text-light);
+  font-size: 80px;
+  font-family: var(--subheading);
+}
+
+.about_h span {
+  color: var(--red);
+}
+
+.about .row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.about .row .img {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+}
+
+.about .row .img img {
+  max-height: 500px;
+  max-width: 500px;
+  border: 10px solid rgb(187 186 186 / 24%); /* Dark border color */
+  border-radius: 20px;
+}
+
+.about .row .content {
+  flex: 1 1 700px;
+  padding: 20px; /* Add some padding to the content */
+}
+
+.about .row .content h1 {
+  color: var(--text-light);
+  font-family: var(--cursive);
+}
+
+.about .row .content h1 span {
+  color: var(--red);
+}
+
+.about .row .content p {
+  font-size: 20px;
+  color: var(--text-muted);
+  text-align: left;
+  line-height: 1.5; /* Improve readability */
+}

@@ -1,0 +1,21 @@
+.my-bookings {
+    padding: 20px;
+  }
+  
+  .my-bookings h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .my-bookings ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .my-bookings li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  

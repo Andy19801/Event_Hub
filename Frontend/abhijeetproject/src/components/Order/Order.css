@@ -1,0 +1,80 @@
+.order-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #222; /* Matches the dark theme of other pages */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: whitesmoke; /* Text color matching the rest of your site */
+}
+
+.order-page h1 {
+    font-size: 3rem;
+    font-family: var(--subheading); /* Assuming this is defined in your global CSS */
+    margin-bottom: 1.5rem;
+    color: whitesmoke; /* Matching the theme */
+}
+
+.order-page p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: var(--text-color); /* Replace with your theme's text color */
+}
+
+.inputBox {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.inputBox label {
+    display: block;
+    font-size: 1.15rem;
+    color: whitesmoke; /* Matching the theme */
+    margin-bottom: 0.5rem;
+}
+
+.inputBox input,
+.inputBox select,
+.inputBox textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    background: #333; /* Matches the input background in the contact form */
+    border: 1px solid #444;
+    color: whitesmoke; /* Matches the input text color */
+}
+
+.inputBox input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.inputBox textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--red); /* Use your primary button color */
+    color: whitesmoke; /* Matching the button text color */
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: darken(var(--red), 10%); /* Darken the button color on hover */
+}
+
+.order-page form p {
+    font-size: 0.9rem;
+    color: #bbb; /* Lighter text for the terms and conditions */
+    margin-top: 2rem;
+}

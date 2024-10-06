@@ -1,0 +1,56 @@
+:root {
+    --subheading: 'Arial', sans-serif; /* Example font family */
+    --red: #e63946; /* Example red color */
+    --bordercolour: rgba(255, 255, 255, 0.2); /* Border color used in the gallery */
+    --background-dark: rgb(51, 51, 51); /* Background color */
+    --text-light: whitesmoke;
+  }
+  
+  .gal {
+    background-color: var(--background-dark); /* Background color for the gallery section */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .galhead {
+    font-family: var(--subheading);
+    color: var(--text-light);
+    font-size: 80px;
+    margin-bottom: 20px; /* Add some spacing below the heading */
+  }
+  
+  .galhead span {
+    color: var(--red);
+  }
+  
+  .galcont {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    grid-template-rows: auto;
+    gap: 5px;
+    padding: 20px;
+    justify-content: space-around;
+    overflow: hidden;
+  }
+  
+  .galcont .box {
+    margin-bottom: 20px;
+    border: 0px solid var(--bordercolour);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .galcont .box img {
+    width: 100%; /* Make sure the image fits its container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 300px;
+    object-fit: cover;
+    transition: transform 0.65s ease, filter 0.65s ease;
+    filter: grayscale(100%);
+  }
+  
+  .galcont .box img:hover {
+    filter: grayscale(0); /* Remove grayscale on hover */
+    transform: scale(1.1); /* Zoom in slightly on hover */
+  }
+  
