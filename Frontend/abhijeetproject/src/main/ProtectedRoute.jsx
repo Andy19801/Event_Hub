@@ -1,18 +1,18 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
+
 const ProtectedRoute = ({ isLoggedIn, userRole, requiredRole, children }) => {
   if (!isLoggedIn) {
     return <Navigate to="/login" />;
   }
 
   if (requiredRole && userRole !== requiredRole) {
-    return <Navigate to="/login" />; // Redirect if user role doesn't match
+    return <Navigate to="/" />;
   }
 
   return children;
 };
-
 export default ProtectedRoute;
 
 
@@ -20,8 +20,19 @@ export default ProtectedRoute;
 
 
 
+// const ProtectedRoute = ({ isLoggedIn, userRole, requiredRole, children }) => {
+//   if (!isLoggedIn) {
+//     return <Navigate to="/login" />;
+//   }
 
+//   if (requiredRole && userRole !== requiredRole) {
+//     return <Navigate to="/login" />; // Redirect if user role doesn't match
+//   }
 
+//   return children;
+// };
+
+// export default ProtectedRoute;
 
 // import React from 'react';
 // import { Navigate } from 'react-router-dom';

@@ -5,3 +5,5 @@
 // export const selectError = (state) => state.eventOwner.error;
 
 
+// const events = useSelector(selectEvents);
+// const bookings = useSelector(selectBookings);

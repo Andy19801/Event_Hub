@@ -1,0 +1,38 @@
+.view-feedbacks {
+    max-width: 800px; /* Set a maximum width for the feedback container */
+    margin: 20px auto; /* Center the container */
+    padding: 20px; /* Add padding inside the container */
+    border: 1px solid #ccc; /* Light border around the container */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  h3 {
+    text-align: center; /* Center the heading */
+    color: #333; /* Darker color for better readability */
+  }
+  
+  .feedback-item {
+    margin-bottom: 15px; /* Space between feedback items */
+    padding: 15px; /* Padding inside each feedback item */
+    border: 1px solid #e0e0e0; /* Light border around feedback item */
+    border-radius: 5px; /* Rounded corners for feedback items */
+    background-color: #ffffff; /* White background for feedback items */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for feedback items */
+  }
+  
+  .feedback-item h4 {
+    margin: 0; /* Remove default margin */
+    color: #007bff; /* Primary color for event name */
+  }
+  
+  .feedback-item p {
+    margin: 5px 0; /* Space between paragraphs */
+    color: #555; /* Gray color for text */
+  }
+  
+  .feedback-item p:last-child {
+    font-style: italic; /* Italic style for comments */
+  }
+  

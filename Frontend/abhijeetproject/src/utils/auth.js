@@ -1,27 +1,21 @@
-export const checkAuthStatus = async () => {
-  // Check if token exists in localStorage or sessionStorage
-  const token = localStorage.getItem('authToken');
-  
-  if (!token) {
-    return { status: false, role: '' }; // Not logged in
-  }
+// src/utils/auth.js
+import axios from 'axios';
 
+export const checkAuthStatus = async () => {
   try {
-    // Decode token or fetch user info based on token (this can vary)
-    const response = await fetch('http://localhost:5000/api/auth/check', {
+    const response = await axios.get('http://localhost:5000/api/auth/check-status', {
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming you're using local storage for tokens
       },
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      return { status: true, role: data.role }; // User is logged in and role is returned
+    if (response.data.isLoggedIn) {
+      return { status: true, role: response.data.role }; // Adjust based on your API response
     } else {
       return { status: false, role: '' };
     }
   } catch (error) {
     console.error('Error checking authentication status:', error);
-    return { status: false, role: '' };
+    return { status: false, role: '' }; // Fallback in case of error
   }
 };

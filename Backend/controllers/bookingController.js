@@ -1,102 +1,99 @@
-// Function to create a booking
 import Booking from '../models/Booking.js';
 import Event from '../models/Event.js';
-import asyncHandler from 'express-async-handler';
 
-async function createBooking(req, res) {
-    try {
-      // Your logic to create a booking
-      res.status(201).json({ message: 'Booking created' });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+// Create a booking (used by /book route)
+export const createBooking = async (req, res) => {
+  try {
+    const { eventId, name, email } = req.body;
+    const userId = req.user._id;
+
+    const event = await Event.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
     }
-  }
-  
-  // Function to view a booking
-  async function viewBooking(req, res) {
-    try {
-      // Your logic to view a booking
-      res.status(200).json({ message: 'Booking details' });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+
+    if (event.ticketsAvailable <= 0) {
+      return res.status(400).json({ message: "Tickets sold out" });
     }
+
+    // Create booking
+    const booking = await Booking.create({
+      eventId,
+      userId,
+      name,
+      email,
+      ticketsBooked: 1,
+    });
+
+    // Reduce tickets
+    event.ticketsAvailable -= 1;
+    await event.save();
+
+    res.status(201).json({
+      message: "Booking successful",
+      booking,
+    });
+
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-  
-  // Function to cancel a booking
-  async function cancelBooking(req, res) {
-    try {
-      // Your logic to cancel a booking
-      res.status(200).json({ message: 'Booking canceled' });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
+};
+
+// Get user bookings (used in /my-bookings)
+export const getUserBookings = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const bookings = await Booking.find({ userId }).populate("eventId");
+
+    res.status(200).json(bookings);
+
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-  
-  // Export all functions at once
-  export { createBooking, viewBooking, cancelBooking };
+};
 
 
 
 
 
+// // controllers/bookingController.js
 // import Booking from '../models/Booking.js';
 // import Event from '../models/Event.js';
-// import asyncHandler from 'express-async-handler';
 
 // // Create a new booking
-// export const createBooking = asyncHandler(async (req, res) => {
-//     const { eventId, ticketType, numberOfSeats } = req.body;
-
-//     // Find the event by its ID
+// export const createBooking = async (req, res) => {
+//   try {
+//     const { eventId, ticketsBooked } = req.body;
 //     const event = await Event.findById(eventId);
-//     if (!event) {
-//         res.status(404);
-//         throw new Error('Event not found');
+
+//     if (!event || event.ticketsAvailable < ticketsBooked) {
+//       return res.status(400).json({ message: 'Not enough tickets available' });
 //     }
 
-//     // Create a new booking
+//     event.ticketsAvailable -= ticketsBooked;
+//     await event.save();
+
 //     const booking = new Booking({
-//         user: req.user._id,
-//         event: eventId,
-//         ticket: ticketType, // Assuming ticketType is stored in the Ticket field in Booking model
-//         noOfSeats: numberOfSeats,
-//         totalPrice: ticketType.price * numberOfSeats, // Calculate total price if price is available in ticketType
+//       eventId,
+//       userId: req.user.id, // Assuming logged-in user
+//       ticketsBooked,
 //     });
 
-//     const createdBooking = await booking.save();
-//     res.status(201).json(createdBooking);
-// });
+//     const savedBooking = await booking.save();
+//     res.status(201).json(savedBooking);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
 
-// // View a booking by its ID
-// export const viewBooking = asyncHandler(async (req, res) => {
-//     const bookingId = req.params.id; // Get booking ID from request parameters
+// // Get user bookings
+// export const getUserBookings = async (req, res) => {
+//   try {
+//     const bookings = await Booking.find({ userId: req.user.id }).populate('eventId');
+//     res.status(200).json(bookings);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
 
-//     // Find the booking by ID and populate associated event details
-//     const booking = await Booking.findById(bookingId).populate('event');
-
-//     if (booking) {
-//         res.json(booking); // Return the booking details
-//     } else {
-//         res.status(404);
-//         throw new Error('Booking not found');
-//     }
-// });
-
-// // Cancel a booking
-// export const cancelBooking = asyncHandler(async (req, res) => {
-//     const bookingId = req.params.id; // Get booking ID from request parameters
-
-//     // Find the booking by ID
-//     const booking = await Booking.findById(bookingId);
-
-//     if (booking) {
-//         await booking.remove(); // Remove the booking
-//         res.json({ message: 'Booking cancelled successfully' });
-//     } else {
-//         res.status(404);
-//         throw new Error('Booking not found');
-//     }
-// });
-
-// // Exporting the functions
-// export { createBooking, viewBooking, cancelBooking };

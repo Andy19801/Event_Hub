@@ -77,7 +77,11 @@ const Login = () => {
         // Dispatch setCredentials action with user data
         dispatch(setCredentials({
           token: response.data.token,
-          user: { name: response.data.name, email: response.data.email, role: formData.role },
+          user: {
+            name: response.data.user.name,
+            email: response.data.user.email,
+            role: response.data.user.role
+          },
         }));
 
         Swal.fire({
@@ -86,15 +90,25 @@ const Login = () => {
           text: `Logged in as ${formData.role}!`,
         });
 
-        // Navigate based on the role
-        if (formData.role === 'admin') {
+
+        if (response.data.user.role === 'admin') {
           navigate('/admin/dashboard');
         } 
-        else if (formData.role === 'event-owner') {
-          navigate('/eventowner/dashboard');
-        } else {
-          navigate('/user/dashboard'); // Redirect to home for users
+        else if (response.data.user.role === 'event-owner') {
+          navigate('/eventownerdashboard/dashboard');
+        } 
+        else {
+          navigate('/user/dashboard');
         }
+        
+        // Navigate to the appropriate dashboard based on user role
+        // if (formData.role === 'admin') {
+        //   navigate('/admin/dashboard');
+        // } else if (formData.role === 'event-owner') {
+        //   navigate('/eventownerdashboard/dashboard');
+        // } else {
+        //   navigate('/user/dashboard'); // Default to user dashboard
+        // }
       } else {
         Swal.fire({
           icon: 'error', 
@@ -103,11 +117,19 @@ const Login = () => {
         });
       }
     } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Login Error',
-        text: 'An error occurred while trying to log in. Please try again later.',
-      });
+      if (error.response && error.response.data) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Error',
+          text: error.response.data.message || 'An error occurred while trying to log in. Please try again later.',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Error',
+          text: 'An error occurred while trying to log in. Please try again later.',
+        });
+      }
       console.error('Error logging in:', error);
     } finally {
       setLoading(false);
@@ -150,7 +172,7 @@ const Login = () => {
           {/* Role selection dropdown */}
           <div className="loginsignup-role">
             <label htmlFor="role">Select Role:</label>
-            <select name="role" value={formData.role} onChange={handleChange}>
+            <select name="role" value={formData.role} onChange={handleChange} disabled={loading}>
               <option value="user">User</option>
               <option value="event-owner">Event Owner</option>
               <option value="admin">Admin</option>
@@ -173,6 +195,9 @@ const Login = () => {
           <button type="submit" disabled={!isChecked || loading}>
             {loading ? 'Loading...' : 'Continue'}
           </button>
+          <p  className="forgot-link" onClick={() => navigate("/forgot-password")} 
+          style={{ cursor: "pointer", color: "#6c63ff", marginTop: "10px" }}>Forgot Password?
+          </p>
         </form>
       </div>
     </div>
@@ -180,3 +205,6 @@ const Login = () => {
 };
 
 export default Login;
+
+
+

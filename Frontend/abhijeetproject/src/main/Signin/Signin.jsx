@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'; // Import SweetAlert
@@ -69,7 +70,9 @@ const Signin = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
+            // Dynamic endpoint based on role
+            const response = await axios.post(`http://localhost:5000/api/auth/signup`, formData);
+
             console.log('API response:', response.data);
             
             if (response.data) {
@@ -141,7 +144,7 @@ const Signin = () => {
                     >
                         <option value="user">User</option>
                         <option value="event-owner">Event Owner</option>
-                        <option value="admin">Admin</option>
+                        {/* <option value="admin">Admin</option> */}
                     </select>
 
                     <p className="loginsignup-login">

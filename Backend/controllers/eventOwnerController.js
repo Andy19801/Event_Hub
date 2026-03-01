@@ -1,4 +1,4 @@
-import Event from '../models/Event.js';
+// import Event from '../models/Event.js';
 import Booking from '../models/Booking.js';
 import Feedback from '../models/Feedback.js';
 import Ticket from '../models/Ticket.js';
@@ -6,11 +6,18 @@ import Ticket from '../models/Ticket.js';
 // Create a new event
 export const createEvent = async (req, res) => {
   try {
-    const newEvent = new Event(req.body);
-    await newEvent.save();
+    const { name, date, location } = req.body;
+
+    const newEvent = await Event.create({
+      name,
+      date,
+      location,
+      ownerId: req.user._id  // IMPORTANT
+    });
+
     res.status(201).json(newEvent);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 

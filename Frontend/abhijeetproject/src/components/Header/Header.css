@@ -1,4 +1,162 @@
+/* ========= COLOR THEME ========= */
+
+
+:root {
+  --primary: #7b52b9;
+  --primary-dark: #6848a0;
+  --text-dark: #333;
+  --white: #fff;
+}
+
+/* ========= HEADER MAIN ========= */
 .header {
+  width: 100%;
+  height: 75px;
+  background: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 35px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ========= LOGO ========= */
+.logo-container img {
+  height: 58px;
+  cursor: pointer;
+}
+
+/* ========= NAV MENU ========= */
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+}
+
+.nav-item a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+  padding-bottom: 3px;
+  transition: 0.2s ease-in-out;
+}
+
+.nav-item a:hover {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+
+/* ========= RIGHT SIDE (AUTH + BOOK BTN) ========= */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* ========= BOOK NOW button ========= */
+.order-btn {
+  background: var(--primary);
+  padding: 9px 20px;
+  border-radius: 25px;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.order-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* ========= LOGIN / SIGNIN / LOGOUT buttons ========= */
+.login-btn,
+
+.logout-btn {
+  background: transparent;
+  border: 2px solid var(--primary);
+  padding: 7px 16px;
+  color: var(--primary);
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.signin-btn {
+  background: transparent;
+  border: 2px solid var(--primary);
+  padding: 7px 16px;
+  color: var(--primary);
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  white-space: nowrap;   /* 👈 PREVENT stretching */
+}
+
+.login-btn:hover,
+.signin-btn:hover,
+.logout-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* ========= PROFILE SECTION ========= */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 10px;
+}
+
+.profile-pic {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+.profile-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* ========= SMALL ARROW ========= */
+.arrow-wrapper {
+  margin-left: 4px;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--primary);
+}
+
+/* ========= RESPONSIVE ========= */
+@media (max-width: 900px) {
+  .nav {
+    display: none; /* hide nav for now (you can enable hamburger if needed) */
+  }
+
+  .header {
+    padding: 0 20px;
+  }
+}
+
+
+/* .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,8 +184,9 @@
   display: flex;
   gap: 10px;
   align-items: center; /* Ensure alignment of profile section and buttons */
+   /* 
 }
-
+ /* 
 .order-btn {
   display: flex;
   align-items: center;
@@ -43,6 +202,7 @@
 }
 
 /* Profile section styling */
+ /* 
 .profile-section {
   display: flex;
   align-items: center;
@@ -54,6 +214,7 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover; /* Ensure the profile picture fits nicely */
+   /* 
   border: 2px solid #7b52b9;
 }
 
@@ -64,6 +225,7 @@
 }
 
 /* Arrow button styles */
+ /* 
 .arrow-wrapper {
   margin-left: 5px;
 }
@@ -77,6 +239,7 @@
 }
 
 /* Logout and Auth Buttons */
+ /* 
 .logout-btn, .login-btn, .signin-btn {
   padding: 10px 15px;
   background-color: #7b52b9;
@@ -91,7 +254,8 @@
 
 .logout-btn:hover, .login-btn:hover, .signin-btn:hover, .order-btn:hover {
   background-color: #6848a0; /* Darker shade for hover */
-}
+   /* 
+} */
 
 
 

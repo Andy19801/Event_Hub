@@ -1,21 +1,20 @@
-import express from "express";
-import {
-  userLogin,
-  eventOwnerLogin,
-  adminLogin,
-  signup,
-} from "../controllers/authController.js";
+// src/routes/authRoute.js
+
+import express from 'express';
+import { signup, userLogin, eventOwnerLogin, adminLogin, checkStatus,forgotPassword ,verifyOtpAndResetPassword} from '../controllers/authController.js';
 
 const router = express.Router();
 
-// Role-based login routes
-router.post("/user-login", userLogin); // Route for user login
-router.post("/event-owner-login", eventOwnerLogin); // Route for event-owner login
-router.post("/admin-login", adminLogin); // Route for admin login
+// Define your routes
+router.post('/signup', signup); // Signup route
+router.post('/user-login', userLogin);// User login route
+router.post('/event-owner-login', eventOwnerLogin);// Event owner login route
+router.post('/admin-login', adminLogin); // Admin login route
 
-// Signup route (common for all)
-router.post("/signup", signup);
+router.get('/check-status', checkStatus); // Route to check authentication status
 
+router.post('/forgot-password', forgotPassword);
+router.post('/verify-otp', verifyOtpAndResetPassword);
 export default router;
 
 
@@ -26,35 +25,26 @@ export default router;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-// import express from 'express';
-// import { signup, login, logout } from '../controllers/authController.js';
-// import { authenticate } from '../middleware/authMiddleware.js';
+// import express from "express";
+// // import {
+// //   userLogin,
+  
+// //   adminLogin,
+// //   signup,
+// // } from "../controllers/authController.js";
+// import { checkStatus } from '../controllers/authController.js';
+// import { verifyToken } from '../middleware/authMiddleware.js';
 
 // const router = express.Router();
 
-// // Signup route
-// router.post('/signin', signup);
+// // // Role-based login routes
+// // router.post("/user-login", userLogin); // Route for user login
+// // router.post("/event-owner-login", eventOwner); // Route for event-owner login
+// // router.post("/admin-login", adminLogin); // Route for admin login
 
-// // Login route
-// router.post('/login', login);
+// // Signup route (common for all)
+// // router.post("/signup", signup);
+// router.get('/check-status', verifyToken, checkStatus);
 
-// // Token verification route
-// router.get('/verify-token', authenticate, (req, res) => {
-//   res.status(200).json({ message: 'Token is valid' });
-// });
-
-// // Logout route
-// router.post('/logout', authenticate, logout);
 
 // export default router;

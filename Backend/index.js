@@ -11,6 +11,8 @@ import ticketRoutes from './routes/ticketRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 import feedbackRoutes from './routes/feedbackRoutes.js';
 import adminRoutes from './routes/adminRoute.js';
+import eventOwnerRoutes from './routes/eventOwnerRoutes.js';
+
 
 // Initialize dotenv to use environment variables
 dotenv.config();
@@ -22,14 +24,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
 app.use('/api/auth', authRoutes);
 app.use('/api/roles', roleRoute);
-app.use('/api/events', eventRoutes);
+app.use('/api/events',eventRoutes);
 app.use('/api/tickets', ticketRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/event-owner',eventOwnerRoutes);
 
 // MongoDB connection using Mongoose (without deprecated options)
 const connectDB = async () => {
