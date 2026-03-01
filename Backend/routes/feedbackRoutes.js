@@ -1,31 +1,32 @@
+// routes/feedbackRoutes.js
 import express from 'express';
-import { createFeedback, viewFeedbacks } from '../controllers/feedbackController.js'; // Adjusted import for grouped exports
+import { submitFeedback, getAllFeedbacks, getFeedbackForEvent } from '../controllers/feedbackController.js';
+import { verifyToken } from '../middleware/authMiddleware.js'; // Middleware to protect routes
 
-const router = express.Router();
+const feedbackrouter = express.Router();
 
-// Routes for Feedback Management
+// Route to submit feedback
+// feedbackrouter.post('/', verifyToken, submitFeedback);
+feedbackrouter.post('/', getAllFeedbacks);
+// Route to get feedback for an event
+feedbackrouter.get('/:eventId', getFeedbackForEvent);
 
-// Create feedback for an event
-router.post('/', createFeedback);
 
-// Get all feedback for a specific event
-router.get('/:eventId', viewFeedbacks);
-
-export default router;
+export default feedbackrouter;
 
 
 
 // import express from 'express';
-// import { createFeedback, getFeedbacksByEventId } from '../controllers/feedbackController.js';
+// import { createFeedback, getFeedbacks } from '../controllers/feedbackController.js';
+// import { authMiddleware } from '../middleware/authMiddleware.js';
 
 // const router = express.Router();
 
-// // Routes for Feedback Management
+// // Route to create feedback for an event (only authenticated users)
+// router.post('/:eventId', authMiddleware, createFeedback);
 
-// // Create feedback for an event
-// router.post('/', createFeedback);
-
-// // Get all feedback for a specific event
-// router.get('/:eventId', getFeedbacksByEventId);
+// // Route to get all feedback for a specific event
+// router.get('/:eventId', getFeedbacks);
 
 // export default router;
+

@@ -1,0 +1,155 @@
+.user-dashboard-container {
+  padding: 40px;
+  text-align: center;
+  background: #f5f6ff;
+  min-height: 100vh;
+}
+
+/* PROFILE CARD */
+.profile-card {
+  width: 360px;
+  margin: 20px auto;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.12);
+  transition: all 0.3s ease-in-out;
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Gradient Banner */
+.profile-banner {
+  height: 130px;
+  background: linear-gradient(135deg, #6a5af9, #836fff, #9a77ff);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Avatar */
+.profile-avatar {
+  margin-top: -55px;
+}
+
+.profile-avatar img {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Name & Role */
+.profile-name {
+  font-size: 21px;
+  font-weight: 700;
+  color: #333;
+  margin-top: 8px;
+}
+
+.profile-role {
+  color: #6b6b6b;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+/* Buttons */
+.profile-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 22px;
+}
+
+.btn-follow {
+  padding: 8px 22px;
+  border: 2px solid #6a5af9;
+  font-weight: 600;
+  border-radius: 8px;
+  background: white;
+  color: #6a5af9;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-follow:hover {
+  background: #f0edff;
+}
+
+.btn-read {
+  padding: 8px 22px;
+  border: none;
+  background: #6a5af9;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-read:hover {
+  background: #5848d6;
+}
+
+/* Search bar */
+.search-bar {
+  margin: 25px auto;
+  max-width: 420px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 11px;
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+
+.search-bar input:focus {
+  border-color: #6a5af9;
+}
+
+/* Bookings list */
+.bookings-container {
+  margin-top: 35px;
+}
+
+.bookings-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.booking-card {
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  margin: 12px auto;
+  max-width: 520px;
+  text-align: left;
+  box-shadow: 0px 3px 12px rgba(0,0,0,0.08);
+}
+
+/* Navigation buttons */
+.dashboard-nav {
+  margin-top: 35px;
+}
+
+.dashboard-nav button {
+  margin: 10px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  background: #6a5af9;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.dashboard-nav button:hover {
+  background: #5848d6;
+}

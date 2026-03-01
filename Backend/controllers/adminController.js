@@ -1,52 +1,96 @@
-import User from '../models/User.js';
-import Event from '../models/Event.js';
+// backend/controllers/adminController.js
 
-// Get all users (admin-only)
-export const viewUsers = async (req, res) => {
+import User from '../models/User.js'; // Import User model
+import Event from '../models/Event.js'; // Import Event model
+import Feedback from '../models/Feedback.js'; // Import Feedback model
+
+// Get dashboard data
+export const getDashboardData = async (req, res) => {
   try {
-    const users = await User.find({}).select('-password'); // Exclude passwords for security
-    return res.status(200).json(users);
+    const eventsCount = await Event.countDocuments();
+    const usersCount = await User.countDocuments();
+    const feedbackCount = await Feedback.countDocuments();
+
+    res.status(200).json({
+      events: eventsCount,
+      users: usersCount,
+      feedback: feedbackCount,
+    });
   } catch (error) {
-    return res.status(500).json({ message: 'Internal server error' });
+    console.error('Error fetching dashboard data:', error);
+    res.status(500).json({ message: 'Error fetching dashboard data' });
   }
 };
 
-// Delete a user by ID (admin-only)
+// Get all users
+export const getUsers = async (req, res) => {
+  try {
+    const users = await User.find().select('-password'); // Exclude password from the response
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Error fetching users' });
+  }
+};
+
+// Delete a user by ID
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
-
+  
   try {
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    await user.remove();
-    return res.status(200).json({ message: 'User deleted successfully' });
+    await User.findByIdAndDelete(id);
+    res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
-    return res.status(500).json({ message: 'Internal server error' });
+    console.error('Error deleting user:', error);
+    res.status(500).json({ message: 'Error deleting user' });
   }
 };
 
-// Approve an event
-export const approveEvent = async (req, res) => {
-  const eventId = req.params.id; // Get the event ID from request parameters
 
-  try {
-    // Find the event by ID
-    const event = await Event.findById(eventId);
+// import Event from '../models/Event.js';
+// import User from '../models/User.js';
+// import Feedback from '../models/Feedback.js';
 
-    if (!event) {
-      return res.status(404).json({ message: 'Event not found' });
-    }
+// // Function to get data for the admin dashboard
+// export const getAdminDashboardData = async (req, res) => {
+//   try {
+//     // Get the counts for events, users, and feedback from the database
+//     const eventCount = await Event.countDocuments();
+//     const userCount = await User.countDocuments();
+//     const feedbackCount = await Feedback.countDocuments();
 
-    // Update the event's status to approved
-    event.status = 'approved'; // Assuming you have a status field
-    const updatedEvent = await event.save();
+//     // Return the counts to the frontend as JSON
+//     res.status(200).json({
+//       events: eventCount,
+//       users: userCount,
+//       feedback: feedbackCount,
+//     });
+//   } catch (error) {
+//     console.error('Error fetching admin dashboard data:', error);
+//     res.status(500).json({ message: 'Error fetching dashboard data' });
+//   }
+// };
 
-    res.json(updatedEvent); // Return the updated event
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-};
+
+
+// import Event from '../models/Event.js';
+// import User from '../models/User.js';
+// import Feedback from '../models/Feedback.js';
+
+// // Get admin dashboard data
+// export const getAdminDashboardData = async (req, res) => {
+//   try {
+//     const events = await Event.countDocuments();
+//     const users = await User.countDocuments();
+//     const feedback = await Feedback.countDocuments();
+
+//     res.status(200).json({
+//       events,
+//       users,
+//       feedback,
+//     });
+//   } catch (err) {
+//     res.status(500).json({ message: 'Failed to retrieve dashboard data', error: err.message });
+//   }
+// };
+

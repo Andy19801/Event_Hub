@@ -1,5 +1,58 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
+// Attach token
+const authHeader = () => ({
+  headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+});
+
+/* =======================================================
+   1) FETCH USER PROFILE
+======================================================= */
+export const fetchUserProfile = createAsyncThunk(
+  "user/fetchProfile",
+  async () => {
+    const res = await axios.get(
+      "http://localhost:5000/api/user/me",
+      authHeader()
+    );
+    return res.data; // { name, email, role }
+  }
+);
+
+/* =======================================================
+   2) UPDATE USER PROFILE
+======================================================= */
+export const updateUserProfileApi = createAsyncThunk(
+  "user/updateProfile",
+  async (data) => {
+    const res = await axios.put(
+      "http://localhost:5000/api/user/me",
+      data,
+      authHeader()
+    );
+    return res.data.user; // updated user
+  }
+);
+
+/* =======================================================
+   3) FETCH USER BOOKINGS
+======================================================= */
+export const fetchUserBookingsApi = createAsyncThunk(
+  "user/fetchBookings",
+  async () => {
+    const res = await axios.get(
+      "http://localhost:5000/api/bookings/user",
+      authHeader()
+    );
+    return res.data; // array of bookings
+  }
+);
+
+
+/* =======================================================
+   ORIGINAL SLICE (NOT TOUCHED)
+======================================================= */
 const initialState = {
   events: [],
   bookings: [],
@@ -18,7 +71,6 @@ const userSlice = createSlice({
   reducers: {
     searchEvents: (state, action) => {
       const { area, city, filters } = action.payload;
-      // Add logic to filter events based on area, city, and any other fields
       state.events = state.events.filter(event => {
         const matchesArea = area ? event.area === area : true;
         const matchesCity = city ? event.city === city : true;
@@ -32,8 +84,7 @@ const userSlice = createSlice({
       return event ? event.tickets : [];
     },
     makeBooking: (state, action) => {
-      const bookingDetails = action.payload;
-      state.bookings.push(bookingDetails);
+      state.bookings.push(action.payload);
     },
     viewBookings: (state, action) => {
       state.bookings = action.payload;
@@ -48,9 +99,46 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
   },
+
+  /* =======================================================
+     🚀 NEW — Add Online API Functionality
+  ======================================================= */
+  extraReducers: (builder) => {
+    builder
+
+      /* Fetch Profile */
+      .addCase(fetchUserProfile.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userProfile = action.payload;
+      })
+      .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      /* Update Profile */
+      .addCase(updateUserProfileApi.fulfilled, (state, action) => {
+        state.userProfile = action.payload;
+      })
+
+      /* Fetch Bookings */
+      .addCase(fetchUserBookingsApi.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchUserBookingsApi.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookings = action.payload;
+      })
+      .addCase(fetchUserBookingsApi.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+  },
 });
 
-// Export actions
 export const {
   searchEvents,
   checkTicketAvailability,
@@ -61,5 +149,4 @@ export const {
   setError,
 } = userSlice.actions;
 
-// Export the reducer
 export default userSlice.reducer;

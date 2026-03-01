@@ -1,60 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import './User Dashboard.css'; // Import CSS for styling
+// src/components/AA/User/Dashboard/UserDashboard.jsx
+
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserBookings } from '../../../../features/user/userActions';
+import { useNavigate } from 'react-router-dom';
+import './UserDashboard.css';
 
 const UserDashboard = () => {
-  const [events, setEvents] = useState([]); // Initialize an empty array to store events
-  const [registeredEvents, setRegisteredEvents] = useState([]); // Initialize an empty array to store registered events
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, token } = useSelector((state) => state.auth);
+  const { bookings, loading, error } = useSelector((state) => state.user);
+
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    // Fetch event data from API endpoint
-    fetch('/api/events')
-      .then(response => response.json())
-      .then(data => setEvents(data));
-  }, []);
+    if (token) {
+      dispatch(fetchUserBookings());
+    }
+  }, [dispatch, token]);
 
-  const handleRegister = (eventId) => {
-    // Register user for the event
-    fetch(`/api/events/${eventId}/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: /* current user ID */ }),
-    })
-      .then(response => response.json())
-      .then((data) => {
-        // Update registered events state
-        setRegisteredEvents((prevEvents) => [...prevEvents, data.event]);
-      });
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
   };
 
+  const filteredBookings = bookings.filter((booking) =>
+    booking.eventId?.name?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="user-dashboard">
-      <h1>Welcome to Your Dashboard</h1>
-      <div className="dashboard-content">
-        <section className="dashboard-section">
-          <h2>Your Events</h2>
-          <p>View and manage your events here.</p>
+    <div className="user-dashboard-container">
+      
+      {/* PROFILE CARD */}
+      <div className="profile-card">
+        <div className="profile-banner"></div>
+
+        <div className="profile-avatar">
+          <img 
+            src="https://cdn-icons-png.flaticon.com/512/219/219983.png"
+            alt="User Avatar"
+          />
+        </div>
+
+        <h2 className="profile-name">{user.name}</h2>
+        <p className="profile-role">{user.role}</p>
+
+    
+      </div>
+
+      {/* SEARCH BAR */}
+      <div className="search-bar">
+        <input 
+          type="text"
+          placeholder="Search your bookings..."
+          value={searchQuery}
+          onChange={handleSearch}
+        />
+      </div>
+
+      {/* BOOKINGS LIST */}
+      <div className="bookings-container">
+        <h2>Your Bookings</h2>
+
+        {loading && <p>Loading bookings...</p>}
+        {error && <p className="error">{error}</p>}
+
+        {filteredBookings.length > 0 ? (
           <ul>
-            {events.map((event) => (
-              <li key={event.id}>
-                {event.name}
-                {registeredEvents.includes(event.id) ? (
-                  <span>Registered</span>
-                ) : (
-                  <button onClick={() => handleRegister(event.id)}>Register</button>
-                )}
+            {filteredBookings.map((booking) => (
+              <li className="booking-card" key={booking._id}>
+                <h3>{booking.eventId.name}</h3>
+                <p><strong>Date:</strong> {new Date(booking.eventId.date).toLocaleDateString()}</p>
+                <p><strong>Location:</strong> {booking.eventId.location}</p>
               </li>
             ))}
           </ul>
-        </section>
-
-        <section className="dashboard-section">
-          <h2>Feedback</h2>
-          <p>Provide feedback or view your past feedback.</p>
-          {/* Add code to display or submit feedback */}
-        </section>
+        ) : (
+          <p>No bookings found.</p>
+        )}
       </div>
+
+      {/* NAVIGATION BUTTONS */}
+      <div className="dashboard-nav">
+        <button onClick={() => navigate('/user/profile')}>Go to Profile</button>
+        <button onClick={() => navigate('/user/events')}>View Events</button>
+      </div>
+
     </div>
   );
 };
 
 export default UserDashboard;
+

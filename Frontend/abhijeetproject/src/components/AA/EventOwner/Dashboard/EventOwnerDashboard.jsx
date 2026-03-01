@@ -1,147 +1,135 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchEvents, fetchBookings, fetchFeedbacks } from '../../../../features/eventOwner/eventOwnerActions';
-import { selectEvents, selectBookings, selectFeedbacks, selectLoading, selectError } from '../../../../features/eventOwner/eventOwnerSelectors';
-import EventList from '../EventList';
-import BookingList from '../BookingList';
-import FeedbackList from '../FeedbackList';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  fetchDashboardData,
+  createEvent,
+  updateEvent,
+  deleteEvent,
+  fetchUserBookings
+} from "../../../../features/eventOwner/eventOwnerSlice";
+
+import CreateEventForm from "../CreateEventForm";
+import EventList from "../EventList";
+import ViewBookings from "../ViewBookings";
+
+import "./EventOwnerDashboard.css";
 
 const EventOwnerDashboard = () => {
-    const dispatch = useDispatch();
-    const events = useSelector(selectEvents);
-    const bookings = useSelector(selectBookings);
-    const feedbacks = useSelector(selectFeedbacks);
-    const loading = useSelector(selectLoading);
-    const error = useSelector(selectError); 
+  const dispatch = useDispatch();
+  const { events, bookings, feedbacks, loading, error } = useSelector(
+    (state) => state.eventOwner
+  );
 
-    useEffect(() => {
-        dispatch(fetchEvents());
-    }, [dispatch]);
+  const [editEvent, setEditEvent] = useState(null);
 
-    return (
-        <div>
-            <h1>Event Owner Dashboard</h1>
-            {loading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
-            
-            <section>
-                <h2>My Events</h2>
-                <EventList events={events} />
-            </section>
+  useEffect(() => {
+    dispatch(fetchDashboardData());
+    dispatch(fetchUserBookings());
+  }, [dispatch]);
 
-            <section>
-                <h2>Bookings</h2>
-                <BookingList bookings={bookings} />
-            </section>
+  return (
+    <div className="dashboard-container">
+      <h2>Event Owner Dashboard</h2>
 
-            <section>
-                <h2>Feedbacks</h2>
-                <FeedbackList feedbacks={feedbacks} />
-            </section>
-        </div>
-    );
+      {loading && <p>Loading...</p>}
+      {error && <p className="error-msg">{error}</p>}
+
+      {/* Stats */}
+      <div className="stats-cards">
+        <div className="card blue">{events.length} Events</div>
+        <div className="card red">{bookings.length} Bookings</div>
+        <div className="card green">{feedbacks.length} Feedbacks</div>
+      </div>
+
+      {/* Create / Update Event Form */}
+      <CreateEventForm
+        editEvent={editEvent}
+        setEditEvent={setEditEvent}
+        onCreate={(data) => dispatch(createEvent(data))}
+        onUpdate={(data) => dispatch(updateEvent(data))}
+      />
+
+      {/* Events List */}
+      <EventList
+        events={events}
+        onEdit={(event) => setEditEvent(event)}
+        onDelete={(id) => dispatch(deleteEvent(id))}
+      />
+
+      {/* Bookings */}
+      <ViewBookings bookings={bookings} />
+    </div>
+  );
 };
 
 export default EventOwnerDashboard;
 
 
+// import React, { useEffect, useState } from "react";
+// import { useSelector, useDispatch } from "react-redux";
 
-
-
-
-
-
-
-
-
-
-
-// import React, { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 // import {
-//   fetchBookings,
-//   fetchFeedbacks,
+//   fetchDashboardData,
 //   createEvent,
 //   updateEvent,
 //   deleteEvent,
-// } from '../../../../features/eventOwner/eventOwnerActions';
-// import {
-//   selectBookings,
-//   selectFeedbacks,
-//   selectEvents,
-//   selectLoading,
-//   selectError,
-// } from '../../../../features/eventOwner/eventOwnerSelectors'; // Adjust the import path as necessary
-// import './EventOwnerDashboard.css';
+//   fetchUserBookings
+// } from "../../../../features/eventOwner/eventOwnerSlice";
+
+// import CreateEventForm from "../CreateEventForm";
+// import EventList from "../EventList";
+// import ViewBookings from "../ViewBookings";
+
+// import "./EventOwnerDashboard.css";
 
 // const EventOwnerDashboard = () => {
 //   const dispatch = useDispatch();
-//   const bookings = useSelector(selectBookings);
-//   const feedbacks = useSelector(selectFeedbacks);
-//   const events = useSelector(selectEvents);
-//   const loading = useSelector(selectLoading);
-//   const error = useSelector(selectError);
+//   const { events, bookings, feedbacks, loading, error } = useSelector(
+//     (state) => state.eventOwner
+//   );
+
+//   const [editEvent, setEditEvent] = useState(null);
 
 //   useEffect(() => {
-//     const eventId = 'your-event-id'; // Replace with actual event ID
-//     dispatch(fetchBookings(eventId));
-//     dispatch(fetchFeedbacks(eventId));
+//     dispatch(fetchDashboardData());
+//     dispatch(fetchUserBookings());
 //   }, [dispatch]);
 
-//   const handleCreateEvent = (eventDetails) => {
-//     dispatch(createEvent(eventDetails));
-//   };
-
-//   const handleUpdateEvent = (eventId, updatedDetails) => {
-//     dispatch(updateEvent({ eventId, updatedDetails }));
-//   };
-
-//   const handleDeleteEvent = (eventId) => {
-//     dispatch(deleteEvent(eventId));
-//   };
-
-//   if (loading) {
-//     return <div>Loading...</div>;
-//   }
-
-//   if (error) {
-//     return <div>Error: {error}</div>;
-//   }
-
 //   return (
-//     <div className="dashboard">
-//       <h1>Event Owner Dashboard</h1>
+//     <div className="dashboard-container">
+//       <h2>Event Owner Dashboard</h2>
 
-//       <h2>Bookings</h2>
-//       <ul>
-//         {bookings.map((booking) => (
-//           <li key={booking.id}>{booking.details}</li>
-//         ))}
-//       </ul>
+//       {loading && <p>Loading...</p>}
+//       {error && <p className="error-msg">{error}</p>}
 
-//       <h2>Feedbacks</h2>
-//       <ul>
-//         {feedbacks.map((feedback) => (
-//           <li key={feedback.id}>{feedback.message}</li>
-//         ))}
-//       </ul>
+//       {/* Stats */}
+//       <div className="stats-cards">
+//         <div className="card blue">{events.length} Events</div>
+//         <div className="card red">{bookings.length} Bookings</div>
+//         <div className="card green">{feedbacks.length} Feedbacks</div>
+//       </div>
 
-//       <h2>Manage Events</h2>
-//       {events.map((event) => (
-//         <div key={event.id}>
-//           <h3>{event.title}</h3>
-//           <button className="button" onClick={() => handleUpdateEvent(event.id, { title: 'Updated Title' })}>
-//             Update Event
-//           </button>
-//           <button className="button" onClick={() => handleDeleteEvent(event.id)}>Delete Event</button>
-//         </div>
-//       ))}
-      
-//       <button className="button" onClick={() => handleCreateEvent({ title: 'New Event', details: 'Event details here' })}>
-//         Create New Event
-//       </button>
+//       {/* Create or Edit */}
+//       <CreateEventForm
+//         editEvent={editEvent}
+//         setEditEvent={setEditEvent}
+//         onCreate={(data) => dispatch(createEvent(data))}
+//        onUpdate={(data) => dispatch(updateEvent(data))}
+//       />
+
+//       {/* Events List */}
+//       <EventList
+//         events={events}
+//         onEdit={(event) => setEditEvent(event)}
+//         onDelete={(id) => dispatch(deleteEvent(id))}
+//       />
+
+//       {/* Bookings */}
+//       <ViewBookings bookings={bookings} />
 //     </div>
 //   );
 // };
 
 // export default EventOwnerDashboard;
+
