@@ -11,17 +11,17 @@
 // export default router;
 import express from 'express';
 import { protect } from '../middleware/authMiddleware.js'; // Protect middleware to authenticate the user
-import { authorizeRoles } from '../middleware/authMiddleware.js'; // Role-based authorization
+import {verifyToken } from '../middleware/authMiddleware.js'; // Role-based authorization
 
 const router = express.Router();
 
 // Route only accessible by admins
-router.get('/admin/dashboard', protect, authorizeRoles('admin'), (req, res) => {
+router.get('/admin/dashboard', verifyToken, (req, res) => {
   res.json({ message: 'Welcome to the Admin Dashboard' });
 });
 
 // Route accessible by both admins and event organizers
-router.post('/event/create', protect, authorizeRoles('admin', 'organizer'), (req, res) => {
+router.post('/event/create', verifyToken, (req, res) => {
   res.json({ message: 'Event creation is allowed' });
 });
 
