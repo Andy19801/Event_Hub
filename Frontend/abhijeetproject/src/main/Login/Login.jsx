@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'; // SweetAlert for notifications
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setCredentials } from '../../features/auth/authSlice';
+import { setCredentials } from '../../features/auth/authSlice'; // Import the setCredentials action
 import './Login.css';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 
@@ -74,6 +74,7 @@ const Login = () => {
       const response = await axios.post(`http://localhost:5000/api/auth/${formData.role}-login`, formData);
 
       if (response.data.token) {
+        // Dispatch setCredentials action with user data
         dispatch(setCredentials({
           token: response.data.token,
           user: {
@@ -110,7 +111,7 @@ const Login = () => {
         // }
       } else {
         Swal.fire({
-          icon: 'error',
+          icon: 'error', 
           title: 'Login Failed',
           text: 'Invalid email or password.',
         });
